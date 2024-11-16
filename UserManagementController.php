@@ -1665,7 +1665,6 @@ class UserManagementController extends Controller
             $allDids = CustomerDids::where('customer_id', $user->id)->get();
             $subscriptionPackages = SubscriptionPackages::all();
             $customerTokens = BarclaycardCustomerPaymentTokens::where('customer_id', $userId)->get(['card_mask', 'expiration_date', 'brand', 'customer_number', 'is_primary', 'id', 'email']);
-            // $users = User::all();
 
             return view('manageuser.all-networks', [
                 'userInvoices' => $userInvoices,
@@ -1695,7 +1694,7 @@ class UserManagementController extends Controller
 
             Log::error("AdminManageUserController (adminManageUser) : " . $ex);
             dd($ex);
-            // return redirect()->route('dashboard/dashboard')->with('error', 'An error occurred.');
+            //return redirect()->route('dashboard/dashboard')->with('error', 'An error occurred.');
         }
     }
 
@@ -3119,6 +3118,7 @@ class UserManagementController extends Controller
         if ($password == null) {
             return redirect()->back()->with('error', 'Entered SIP Incorrect');
         }
+
         $customerRefNo = User::where('id', $request->customerId)
             ->value('customer_refno');
 
@@ -4006,7 +4006,6 @@ class UserManagementController extends Controller
             'did_id' => 'required|integer',
             'customer_id' => 'required|integer',
         ]);
-        // dd($request->all());
 
         try {
             $user = User::findOrFail($validated['customer_id']);
